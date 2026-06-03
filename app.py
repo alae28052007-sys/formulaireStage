@@ -83,6 +83,48 @@ def users_data():
     return jsonify([dict(row) for row in rows])
 
 
+@app.route('/users/<int:user_id>', methods=['GET'])
+def user_detail(user_id):
+    with get_db_connection() as conn:
+        row = conn.execute(
+            "SELECT id, name, email, bio, prenom, ville, created_at FROM users WHERE id = ?",
+            (user_id,)
+        ).fetchone()
+    if row is None:
+        return jsonify({"error": "not found"}), 404
+    return jsonify(dict(row))
+
+
+@app.route('/users/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    data = request.get_json() or {}
+    name = (data.get('name') or '').strip()
+    email = (data.get('email') or '').strip()
+    bio = (data.get('bio') or '').strip()
+    prenom = (data.get('prenom') or '').strip()
+    ville = (data.get('ville') or '').strip()
+
+    if not name or not email:
+        return jsonify({"error": "name and email required"}), 400
+
+    with get_db_connection() as conn:
+        conn.execute(
+            "UPDATE users SET name=?, email=?, bio=?, prenom=?, ville=? WHERE id=?",
+            (name, email, bio, prenom, ville, user_id),
+        )
+        conn.commit()
+
+    return jsonify({"ok": True})
+
+
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    with get_db_connection() as conn:
+        conn.execute("DELETE FROM users WHERE id=?", (user_id,))
+        conn.commit()
+    return jsonify({"ok": True})
+
+
 if __name__ == "__main__":
     init_db()
     app.run(debug=True) 
