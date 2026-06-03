@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Soumettre vos informations</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: linear-gradient(135deg, #eef2ff 0%, #f8fcff 100%); min-height: 100vh; }
+    .form-card { max-width: 700px; margin: 0 auto; border: none; border-radius: 1rem; }
+    .form-card h1 { color: #1d3f64; }
+    .info-footer { margin-top: 1.5rem; padding: 1.25rem; background: #ffffff; border: 1px solid #dde4ee; border-radius: 1rem; }
+    .info-footer h2 { color: #2a5d84; }
+    .info-footer p { margin-bottom: 0.5rem; }
+    .form-control:focus { box-shadow: 0 0 0 0.2rem rgba(42,93,132,.25); }
+  </style>
+</head>
+<body class="bg-light">
+  <main class="container py-5">
+    <h1 class="mb-4">Soumettre vos informations</h1>
+
+    <form action="/submit" method="post" class="form-card card p-4 shadow-sm">
+      <div class="mb-3">
+        <label for="name" class="form-label"><strong>Nom</strong></label>
+        <input id="name" name="name" type="text" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label"><strong>Email</strong></label>
+        <input id="email" name="email" type="email" class="form-control" required>
+      </div>
+
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <label for="prenom" class="form-label"><strong>Prénom</strong></label>
+          <input id="prenom" name="prenom" type="text" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="ville" class="form-label"><strong>Ville</strong></label>
+          <input id="ville" name="ville" type="text" class="form-control">
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+        <a href="/" class="btn btn-outline-secondary">Accueil</a>
+        <a href="/static/user.html" class="btn btn-outline-secondary">Voir les enregistrements</a>
+      </div>
+    </form>
+
+    <section class="info-footer">
+      <h2>Mes informations</h2>
+      <p><strong>Nom :</strong> Ayad Alae</p>
+      <p><strong>Email :</strong> alae28052007@gmail.com</p>
+      <p><strong>Téléphone :</strong> +33 1 11 22 33 44</p>
+      <p><strong>Adresse :</strong> 31000 Toulouse, France</p>
+      <p><strong>Message :</strong> N'hésitez pas à me contacter pour des questions, des projets ou des collaborations.</p>
+    </section>
+  </main>
+</body>
+</html>
