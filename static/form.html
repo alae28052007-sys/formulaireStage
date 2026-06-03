@@ -5,51 +5,145 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Soumettre vos informations</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    body { background: linear-gradient(135deg, #eef2ff 0%, #f8fcff 100%); min-height: 100vh; }
-    .form-card { max-width: 700px; margin: 0 auto; border: none; border-radius: 1rem; }
-    .form-card h1 { color: #1d3f64; }
-    .info-footer { margin-top: 1.5rem; padding: 1.25rem; background: #ffffff; border: 1px solid #dde4ee; border-radius: 1rem; }
-    .info-footer h2 { color: #2a5d84; }
-    .info-footer p { margin-bottom: 0.5rem; }
-    .form-control:focus { box-shadow: 0 0 0 0.2rem rgba(42,93,132,.25); }
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    main {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      margin: 2rem auto;
+      max-width: 900px;
+    }
+    
+    .form-card {
+      max-width: 700px;
+      margin: 0 auto;
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+    }
+    
+    .form-card h1 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .form-label {
+      color: #2d3748;
+      font-weight: 600;
+    }
+    
+    .form-control, .form-control:focus {
+      border: 2px solid #e9ecef;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    .btn-outline-secondary {
+      color: #667eea;
+      border-color: #667eea;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-secondary:hover {
+      background-color: #667eea;
+      border-color: #667eea;
+      transform: translateY(-2px);
+    }
+    
+    .info-footer {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border: 2px solid #667eea;
+      border-radius: 1rem;
+    }
+    
+    .info-footer h2 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .info-footer p {
+      margin-bottom: 0.5rem;
+      color: #2d3748;
+    }
   </style>
 </head>
-<body class="bg-light">
+<body>
   <main class="container py-5">
-    <h1 class="mb-4">Soumettez vos informations</h1>
+    <h1 class="mb-4 text-center">
+      <i class="bi bi-pencil-square"></i> Soumettez vos informations
+    </h1>
 
-    <form action="/submit" method="post" class="form-card card p-4 shadow-sm">
+    <form action="/submit" method="post" class="form-card card p-4">
       <div class="mb-3">
-        <label for="name" class="form-label"><strong>Nom</strong></label>
+        <label for="name" class="form-label"><i class="bi bi-person"></i> Nom</label>
         <input id="name" name="name" type="text" class="form-control" required>
       </div>
 
       <div class="mb-3">
-        <label for="email" class="form-label"><strong>Email</strong></label>
+        <label for="email" class="form-label"><i class="bi bi-envelope"></i> Email</label>
         <input id="email" name="email" type="email" class="form-control" required>
       </div>
 
       <div class="row g-3 mb-3">
         <div class="col-md-6">
-          <label for="prenom" class="form-label"><strong>Prénom</strong></label>
+          <label for="prenom" class="form-label"><i class="bi bi-person-badge"></i> Prénom</label>
           <input id="prenom" name="prenom" type="text" class="form-control">
         </div>
         <div class="col-md-6">
-          <label for="ville" class="form-label"><strong>Ville</strong></label>
+          <label for="ville" class="form-label"><i class="bi bi-geo-alt"></i> Ville</label>
           <input id="ville" name="ville" type="text" class="form-control">
         </div>
       </div>
 
+      <div class="mb-3">
+        <label for="bio" class="form-label"><i class="bi bi-chat-left-quote"></i> Bio</label>
+        <textarea id="bio" name="bio" class="form-control" rows="3" placeholder="Dites-nous quelque chose sur vous..."></textarea>
+      </div>
+
       <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary">Soumettre</button>
-        <a href="/" class="btn btn-outline-secondary">Accueil</a>
-        <a href="/static/user.html" class="btn btn-outline-secondary">Voir les enregistrements</a>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-check-circle"></i> Soumettre
+        </button>
+        <a href="/" class="btn btn-outline-secondary">
+          <i class="bi bi-house"></i> Accueil
+        </a>
+        <a href="/static/user.html" class="btn btn-outline-secondary">
+          <i class="bi bi-table"></i> Voir les enregistrements
+        </a>
       </div>
     </form>
 
     <section class="info-footer">
-      <h2>Mes informations</h2>
+      <h2><i class="bi bi-person-circle"></i> Mes informations</h2>
       <p><strong>Nom :</strong> Ayad Alae</p>
       <p><strong>Email :</strong> alae28052007@gmail.com</p>
       <p><strong>Téléphone :</strong> +33 1 11 22 33 44</p>

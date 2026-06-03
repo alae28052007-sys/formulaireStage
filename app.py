@@ -74,6 +74,11 @@ def users():
     return app.send_static_file("user.html")
 
 
+@app.route("/listusers")
+def listusers():
+    return app.send_static_file("listusers.html")
+
+
 @app.route("/users-data")
 def users_data():
     with get_db_connection() as conn:
@@ -81,6 +86,17 @@ def users_data():
             "SELECT id, name, email, bio, prenom, ville, created_at FROM users ORDER BY id DESC"
         ).fetchall()
     return jsonify([dict(row) for row in rows])
+
+
+@app.route("/delete-user/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    try:
+        with get_db_connection() as conn:
+            conn.execute("DELETE FROM users WHERE id = ?", (user_id,))
+            conn.commit()
+        return jsonify({"success": True, "message": "Utilisateur supprimé"})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 if __name__ == "__main__":
