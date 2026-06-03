@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier l'enregistrement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background:#f8f9fa; }
+        .card { max-width:700px; margin:40px auto; padding:20px; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="card shadow-sm">
+            <h1 class="h4 mb-3">Modifier l'enregistrement</h1>
+            <form id="editForm">
+                <div class="mb-3">
+                    <label class="form-label">Nom</label>
+                    <input id="name" name="name" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Prénom</label>
+                    <input id="prenom" name="prenom" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input id="email" name="email" type="email" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ville</label>
+                    <input id="ville" name="ville" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <textarea id="bio" name="bio" class="form-control" rows="4"></textarea>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button id="deleteBtn" type="button" class="btn btn-danger">Supprimer</button>
+                    <a href="/static/user.html" class="btn btn-outline-secondary">Retour</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function qs(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        const id = qs('id');
+        if (!id) {
+            alert('ID manquant');
+            location.href = '/static/user.html';
+        }
+
+        async function load() {
+            const res = await fetch(`/users/${id}`);
+            if (!res.ok) { alert('Enregistrement introuvable'); location.href = '/static/user.html'; return; }
+            const u = await res.json();
+            document.getElementById('name').value = u.name || '';
+            document.getElementById('prenom').value = u.prenom || '';
+            document.getElementById('email').value = u.email || '';
+            document.getElementById('ville').value = u.ville || '';
+        }
+
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                name: document.getElementById('name').value,
+                prenom: document.getElementById('prenom').value,
+                email: document.getElementById('email').value,
+                ville: document.getElementById('ville').value,
+            };
+            const res = await fetch(`/users/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+                alert('Enregistrement mis à jour');
+                location.href = '/static/user.html';
+            } else {
+                alert('Erreur lors de la mise à jour');
+            }
+        });
+
+        document.getElementById('deleteBtn').addEventListener('click', async () => {
+            if (!confirm('Confirmer la suppression ?')) return;
+            const res = await fetch(`/users/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                alert('Enregistrement supprimé');
+                location.href = '/static/user.html';
+            } else {
+                alert('Échec de la suppression');
+            }
+        });
+
+        load();
+    </script>
+</body>
+</html>

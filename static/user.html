@@ -44,6 +44,10 @@
           <td>${u.bio || '—'}</td>
           <td>${u.ville || '—'}</td>
           <td>${u.created_at}</td>
+          <td>
+            <a class="btn btn-sm btn-outline-primary" href="/static/Effacement.html?id=${u.id}">Modifier</a>
+            <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteUser(${u.id})">Supprimer</button>
+          </td>
         </tr>
       `).join('');
 
@@ -65,6 +69,16 @@
           </table>
         </div>
       `;
+    }
+
+    async function deleteUser(id) {
+      if (!confirm('Confirmer la suppression de l\'enregistrement ?')) return;
+      const res = await fetch(`/users/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        loadUsers();
+      } else {
+        alert('Échec de la suppression');
+      }
     }
 
     window.addEventListener('DOMContentLoaded', loadUsers);
