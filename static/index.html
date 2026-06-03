@@ -73,11 +73,79 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    main {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      margin: 2rem auto;
+      max-width: 900px;
+    }
+    
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    .btn-outline-secondary {
+      color: #667eea;
+      border-color: #667eea;
+    }
+    
+    .btn-outline-secondary:hover {
+      background-color: #667eea;
+      border-color: #667eea;
+    }
+    
+    .card-hero {
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .card-hero:hover {
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.25);
+      transform: translateY(-5px);
+    }
+    
+    .card-hero h2 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
 </head>
 <body>
+<body>
   <main class="container py-5">
     <div class="hero text-center mb-5">
+      <h1 class="display-5"><i class="bi bi-house-fill"></i> Bienvenue</h1>
       <h1 class="display-5"><i class="bi bi-house-fill"></i> Bienvenue</h1>
       <p class="lead text-secondary">Utilisez le formulaire pour envoyer des informations, puis consultez la liste des enregistrements stockés.</p>
       <div class="d-flex justify-content-center gap-3 mt-4">
@@ -87,9 +155,17 @@
         <a href="/static/user.html" class="btn btn-outline-secondary btn-lg">
           <i class="bi bi-table"></i> Voir les enregistrements
         </a>
+        <a href="/static/form.html" class="btn btn-primary btn-lg">
+          <i class="bi bi-pencil-square"></i> Remplir le formulaire
+        </a>
+        <a href="/static/user.html" class="btn btn-outline-secondary btn-lg">
+          <i class="bi bi-table"></i> Voir les enregistrements
+        </a>
       </div>
     </div>
 
+    <div class="card card-hero p-4">
+      <h2><i class="bi bi-info-circle"></i> Instructions</h2>
     <div class="card card-hero p-4">
       <h2><i class="bi bi-info-circle"></i> Instructions</h2>
       <p>La page de formulaire envoie les données au serveur avec la méthode POST. Les informations sont ensuite stockées dans une base SQLite et visibles sur la page des utilisateurs.</p>

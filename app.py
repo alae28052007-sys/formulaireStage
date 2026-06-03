@@ -74,6 +74,11 @@ def users():
     return app.send_static_file("user.html")
 
 
+@app.route("/listusers")
+def listusers():
+    return app.send_static_file("listusers.html")
+
+
 @app.route("/users-data")
 def users_data():
     with get_db_connection() as conn:
